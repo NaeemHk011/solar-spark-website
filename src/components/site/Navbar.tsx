@@ -22,68 +22,100 @@ export function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 inset-x-0 z-50 transition-all ${
-        scrolled ? "glass-nav" : "bg-transparent"
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
+        scrolled ? "glass-nav shadow-sm" : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3">
-        <a href="#home" className="flex items-center gap-2">
-          <span className="grid h-9 w-9 place-items-center rounded-lg bg-primary text-accent">
-            <Sun className="h-5 w-5" strokeWidth={2.5} />
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 py-3.5">
+        {/* Logo */}
+        <a href="#home" className="flex items-center gap-2.5 group">
+          <span
+            className={`grid h-10 w-10 place-items-center rounded-xl transition-all duration-300 ${
+              scrolled
+                ? "bg-gradient-to-br from-primary to-[oklch(0.32_0.08_255)] shadow-sm"
+                : "bg-white/15 backdrop-blur-sm"
+            }`}
+          >
+            <Sun
+              className={`h-5 w-5 transition-colors ${scrolled ? "text-accent" : "text-accent"}`}
+              strokeWidth={2.5}
+            />
           </span>
-          <span className="font-display text-base font-bold text-primary">
-            Solar Care <span className="text-muted-foreground font-semibold">& Electric LLC</span>
+          <span className={`font-display text-[15px] font-bold leading-tight transition-colors ${scrolled ? "text-primary" : "text-white"}`}>
+            Solar Care
+            <span className={`block text-[11px] font-medium tracking-wide transition-colors ${scrolled ? "text-muted-foreground" : "text-white/65"}`}>
+              & Electric LLC
+            </span>
           </span>
         </a>
 
-        <ul className="hidden md:flex items-center gap-8">
+        {/* Desktop links */}
+        <ul className="hidden md:flex items-center gap-7">
           {links.map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
-                className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors"
+                className={`relative text-sm font-medium transition-colors group/link ${
+                  scrolled
+                    ? "text-foreground/75 hover:text-primary"
+                    : "text-white/85 hover:text-white"
+                }`}
               >
                 {l.label}
+                <span
+                  className={`absolute -bottom-0.5 left-0 h-[2px] w-0 rounded-full transition-all duration-300 group-hover/link:w-full ${
+                    scrolled ? "bg-accent" : "bg-white/60"
+                  }`}
+                />
               </a>
             </li>
           ))}
         </ul>
 
+        {/* Desktop CTA */}
         <a
           href="#contact"
-          className="hidden md:inline-flex items-center rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground shadow-sm hover:brightness-95 transition"
+          className={`hidden md:inline-flex items-center gap-1.5 rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-accent-foreground transition-all duration-200 ${
+            scrolled
+              ? "shadow-md shadow-accent/30 hover:shadow-lg hover:shadow-accent/40"
+              : "shadow-lg shadow-black/20 hover:shadow-xl"
+          } hover:brightness-95`}
         >
           Get a Free Quote
         </a>
 
+        {/* Mobile hamburger */}
         <button
           aria-label="Toggle menu"
-          className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-primary"
+          className={`md:hidden inline-flex items-center justify-center rounded-lg p-2 transition-colors ${
+            scrolled ? "text-primary hover:bg-secondary" : "text-white hover:bg-white/10"
+          }`}
           onClick={() => setOpen((v) => !v)}
         >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </nav>
 
+      {/* Mobile menu */}
       {open && (
-        <div className="md:hidden glass-nav border-t">
-          <ul className="mx-auto max-w-7xl px-4 py-4 space-y-2">
+        <div className="md:hidden glass-nav border-t border-border/60">
+          <ul className="mx-auto max-w-7xl px-4 py-4 space-y-1">
             {links.map((l) => (
               <li key={l.href}>
                 <a
                   href={l.href}
                   onClick={() => setOpen(false)}
-                  className="block rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-secondary"
+                  className="flex items-center rounded-lg px-3 py-2.5 text-sm font-medium text-foreground hover:bg-secondary hover:text-primary transition-colors"
                 >
                   {l.label}
                 </a>
               </li>
             ))}
-            <li>
+            <li className="pt-2">
               <a
                 href="#contact"
                 onClick={() => setOpen(false)}
-                className="block rounded-full bg-accent px-4 py-2.5 text-center text-sm font-semibold text-accent-foreground"
+                className="block rounded-full bg-accent px-4 py-2.5 text-center text-sm font-semibold text-accent-foreground shadow-sm shadow-accent/20"
               >
                 Get a Free Quote
               </a>

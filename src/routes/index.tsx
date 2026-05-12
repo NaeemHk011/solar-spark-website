@@ -24,11 +24,14 @@ import {
   Leaf,
   DollarSign,
   PhoneCall,
+  Plus,
+  Minus,
 } from "lucide-react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/site/Navbar";
 import { Reveal } from "@/components/site/Reveal";
 import heroBg from "@/assets/hero-bg.jpg";
+import heroSolar from "@/assets/hero-solar.jpg";
 import aboutImg from "@/assets/about-team.jpg";
 
 export const Route = createFileRoute("/")({
@@ -87,7 +90,7 @@ function Hero() {
             <span className="text-accent">Clean Energy</span>
           </h1>
           <p className="mt-6 max-w-2xl text-base sm:text-lg text-white/80 leading-relaxed">
-            Expert solar installation, electrical repair, and EV charging solutions —
+            Expert solar installation, electrical repair, and EV charging solutions  
             engineered, permitted, and installed by licensed professionals you can trust.
           </p>
 
@@ -123,27 +126,38 @@ function Hero() {
         </Reveal>
 
         <Reveal delay={120} className="lg:col-span-5">
-          <div className="rounded-2xl border border-white/15 bg-white/5 backdrop-blur-md p-6 shadow-2xl">
-            <h3 className="font-display text-lg font-bold">Why homeowners choose us</h3>
-            <ul className="mt-4 space-y-3 text-sm">
-              {[
-                "Free on-site assessment and energy audit",
-                "Transparent fixed-price quotes — no surprises",
-                "Permits, inspections, and rebates handled",
-                "Workmanship warranty on every installation",
-              ].map((t) => (
-                <li key={t} className="flex items-start gap-3 text-white/85">
-                  <Check className="h-4 w-4 mt-0.5 text-accent shrink-0" />
-                  <span>{t}</span>
-                </li>
-              ))}
-            </ul>
-            <a
-              href="tel:+15551234567"
-              className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
-            >
-              <PhoneCall className="h-4 w-4" /> (555) 123-4567
-            </a>
+          <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/20">
+            <img
+              src={heroSolar}
+              alt="Solar panels on residential roof"
+              className="h-64 sm:h-80 lg:h-[460px] w-full object-cover"
+            />
+            <div
+              className="absolute inset-0"
+              style={{ background: "linear-gradient(to top, oklch(0.16 0.05 258 / 0.97) 0%, oklch(0.16 0.05 258 / 0.5) 45%, transparent 100%)" }}
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-6">
+              <h3 className="font-display text-lg font-bold">Why homeowners choose us</h3>
+              <ul className="mt-3 space-y-2.5 text-sm">
+                {[
+                  "Free on-site assessment and energy audit",
+                  "Transparent fixed-price quotes   no surprises",
+                  "Permits, inspections, and rebates handled",
+                  "Workmanship warranty on every installation",
+                ].map((t) => (
+                  <li key={t} className="flex items-start gap-2.5 text-white/90">
+                    <Check className="h-4 w-4 mt-0.5 text-accent shrink-0" />
+                    <span>{t}</span>
+                  </li>
+                ))}
+              </ul>
+              <a
+                href="tel:+15551234567"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-accent hover:underline"
+              >
+                <PhoneCall className="h-4 w-4" /> (555) 123-4567
+              </a>
+            </div>
           </div>
         </Reveal>
       </div>
@@ -162,15 +176,18 @@ function TrustStrip() {
     { icon: HomeIcon, label: "Residential" },
     { icon: Building2, label: "Commercial" },
   ];
+  const all = [...items, ...items];
   return (
-    <section className="border-y border-border bg-secondary/50">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 py-6 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-        {items.map((it) => (
-          <div key={it.label} className="flex items-center gap-2 text-sm font-medium text-primary/80">
-            <it.icon className="h-4 w-4 text-accent" />
-            {it.label}
-          </div>
-        ))}
+    <section className="border-y border-border bg-secondary/50 py-5">
+      <div className="marquee-outer">
+        <div className="marquee-track">
+          {all.map((it, i) => (
+            <div key={i} className="flex items-center gap-2 text-sm font-medium text-primary/80 mx-10 shrink-0">
+              <it.icon className="h-4 w-4 text-accent" />
+              {it.label}
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -193,7 +210,7 @@ const services = [
   {
     icon: Zap,
     title: "Electrical Repair & Maintenance",
-    desc: "Licensed electricians for diagnostics, panel upgrades, rewiring, lighting, and code-compliant repairs — residential and commercial.",
+    desc: "Licensed electricians for diagnostics, panel upgrades, rewiring, lighting, and code-compliant repairs   residential and commercial.",
     bullets: [
       "Panel & breaker upgrades (200A+)",
       "Troubleshooting & rewiring",
@@ -216,15 +233,17 @@ const services = [
 
 function Services() {
   return (
-    <section id="services" className="py-20 md:py-28">
+    <section id="services" className="relative py-20 md:py-28 overflow-hidden">
+      <div className="pointer-events-none absolute -top-40 left-1/2 -translate-x-1/2 h-80 w-[800px] rounded-full bg-accent/[0.07] blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 right-0 h-64 w-64 rounded-full bg-primary/[0.04] blur-2xl" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">What We Do</p>
+          <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">What We Do</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
             Complete energy & electrical services
           </h2>
           <p className="mt-4 text-muted-foreground text-lg">
-            One trusted local team for solar power, electrical work, and EV charging — from the
+            One trusted local team for solar power, electrical work, and EV charging   from the
             first quote through final inspection.
           </p>
         </Reveal>
@@ -232,8 +251,8 @@ function Services() {
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {services.map((s, i) => (
             <Reveal key={s.title} delay={i * 100}>
-              <article className="group h-full rounded-2xl bg-card border border-border p-7 shadow-sm transition-all hover:-translate-y-1 hover:shadow-xl flex flex-col">
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent/15 text-accent">
+              <article className="service-card group h-full rounded-2xl bg-card border border-border p-7 shadow-sm flex flex-col">
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.33_0.08_255)] text-accent shadow-sm">
                   <s.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 text-xl font-bold text-primary">{s.title}</h3>
@@ -250,7 +269,7 @@ function Services() {
                   href="#contact"
                   className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary group-hover:text-accent transition"
                 >
-                  Request a quote <ArrowRight className="h-4 w-4" />
+                  Request a quote <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                 </a>
               </article>
             </Reveal>
@@ -266,15 +285,20 @@ function Services() {
 function Process() {
   const steps = [
     { icon: PhoneCall, title: "1. Free Consultation", desc: "Tell us about your property and goals. We schedule a free on-site visit." },
-    { icon: ClipboardList, title: "2. Custom Proposal", desc: "We design your system and deliver a clear, fixed-price quote — no pressure." },
+    { icon: ClipboardList, title: "2. Custom Proposal", desc: "We design your system and deliver a clear, fixed-price quote   no pressure." },
     { icon: Wrench, title: "3. Professional Install", desc: "Our licensed crew handles permits, hardware, and clean installation." },
     { icon: Sparkles, title: "4. Activation & Support", desc: "We commission your system, walk you through it, and stand behind our work." },
   ];
   return (
-    <section className="py-20 md:py-28 bg-primary text-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+    <section
+      className="relative py-20 md:py-28 overflow-hidden text-white"
+      style={{ background: "linear-gradient(135deg, oklch(0.22 0.06 258) 0%, oklch(0.19 0.05 262) 100%)" }}
+    >
+      <div className="pointer-events-none absolute inset-0 hero-grid-overlay opacity-10" />
+      <div className="pointer-events-none absolute right-0 top-0 h-80 w-80 rounded-full bg-accent/[0.07] blur-3xl" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">Our Process</p>
+          <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">Our Process</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
             Simple, transparent, done right
           </h2>
@@ -286,8 +310,11 @@ function Process() {
         <ol className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
           {steps.map((s, i) => (
             <Reveal key={s.title} delay={i * 80}>
-              <li className="rounded-2xl border border-white/10 bg-white/5 p-6 h-full">
-                <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent text-accent-foreground">
+              <li className="relative rounded-2xl border border-white/10 bg-white/5 p-6 h-full hover:bg-white/[0.08] hover:border-white/20 transition-all duration-300">
+                <div className="pointer-events-none absolute right-4 top-3 font-display text-6xl font-black text-white/[0.04] leading-none select-none">
+                  {i + 1}
+                </div>
+                <div className="grid h-12 w-12 place-items-center rounded-xl bg-accent text-accent-foreground shadow-md shadow-accent/25">
                   <s.icon className="h-6 w-6" />
                 </div>
                 <h3 className="mt-5 font-display text-lg font-bold">{s.title}</h3>
@@ -312,7 +339,7 @@ function About() {
   ];
 
   return (
-    <section id="about" className="py-20 md:py-28 bg-secondary/60">
+    <section id="about" className="py-20 md:py-28" style={{ background: "linear-gradient(135deg, oklch(0.97 0.01 255) 0%, oklch(0.99 0.014 80) 100%)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-2 gap-12 items-center">
         <Reveal>
           <div className="relative">
@@ -335,7 +362,7 @@ function About() {
         </Reveal>
 
         <Reveal delay={120}>
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">About Us</p>
+          <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">About Us</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
             Local experts you can count on
           </h2>
@@ -345,21 +372,21 @@ function About() {
             and setting up EV charging for homes and businesses across the region.
           </p>
           <p className="mt-4 text-muted-foreground leading-relaxed">
-            We pair clean workmanship with straightforward communication — so you always know
+            We pair clean workmanship with straightforward communication   so you always know
             what's happening and what it costs. Every project is permitted, inspected, and backed
             by a written workmanship warranty.
           </p>
 
           <div className="mt-8 grid grid-cols-2 gap-4">
-            {stats.map((s) => (
+            {stats.map((s, i) => (
               <div
                 key={s.label}
-                className="rounded-2xl bg-card border border-border p-5 shadow-sm"
+                className={`rounded-2xl p-5 shadow-sm ${i % 2 === 0 ? "bg-gradient-to-br from-primary to-[oklch(0.33_0.08_255)]" : "bg-card border border-border"}`}
               >
-                <div className="font-display text-2xl sm:text-3xl font-extrabold text-primary">
+                <div className={`font-display text-2xl sm:text-3xl font-extrabold ${i % 2 === 0 ? "text-accent" : "text-primary"}`}>
                   {s.num}
                 </div>
-                <div className="mt-1 text-xs sm:text-sm text-muted-foreground">{s.label}</div>
+                <div className={`mt-1 text-xs sm:text-sm ${i % 2 === 0 ? "text-white/70" : "text-muted-foreground"}`}>{s.label}</div>
               </div>
             ))}
           </div>
@@ -373,17 +400,20 @@ function About() {
 
 const whyUs = [
   { icon: BadgeCheck, title: "Licensed & Certified Technicians", desc: "Fully insured, NABCEP-trained, and code-compliant on every project." },
-  { icon: ShieldCheck, title: "Affordable & Transparent Pricing", desc: "Detailed fixed-price quotes with no surprise fees — ever." },
+  { icon: ShieldCheck, title: "Affordable & Transparent Pricing", desc: "Detailed fixed-price quotes with no surprise fees   ever." },
   { icon: Clock, title: "Fast Turnaround", desc: "Most residential projects scheduled and completed within days, not weeks." },
   { icon: Workflow, title: "End-to-End Service", desc: "From design and permits to installation, inspection, and after-care." },
 ];
 
 function WhyUs() {
   return (
-    <section id="why" className="py-20 md:py-28">
+    <section id="why" className="relative py-20 md:py-28 overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 section-dots opacity-[0.35]" />
+      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-accent/[0.06] blur-3xl" />
+      <div className="pointer-events-none absolute left-0 bottom-0 h-64 w-64 rounded-full bg-primary/[0.04] blur-2xl" />
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">Why Us</p>
+          <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">Why Us</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
             Why Solar Care & Electric?
           </h2>
@@ -395,8 +425,8 @@ function WhyUs() {
         <div className="mt-14 grid sm:grid-cols-2 gap-6">
           {whyUs.map((w, i) => (
             <Reveal key={w.title} delay={i * 80}>
-              <div className="flex gap-4 rounded-2xl border border-border bg-card p-7 hover:shadow-lg transition">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary text-accent">
+              <div className="flex gap-4 rounded-2xl bg-card p-7 hover:shadow-xl hover:-translate-y-1 transition-all duration-300" style={{ border: "1px solid var(--color-border)", borderLeft: "3px solid var(--color-accent)" }}>
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-primary to-[oklch(0.33_0.08_255)] text-accent shadow-sm">
                   <w.icon className="h-5 w-5" />
                 </div>
                 <div>
@@ -437,19 +467,21 @@ const testimonials = [
 
 function Testimonials() {
   return (
-    <section className="py-20 md:py-28" style={{ backgroundColor: "var(--soft)" }}>
+    <section className="relative py-20 md:py-28 overflow-hidden" style={{ background: "linear-gradient(135deg, oklch(0.99 0.015 85) 0%, oklch(0.97 0.018 70) 100%)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <Reveal className="max-w-2xl">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">Testimonials</p>
+        <Reveal className="max-w-2xl mx-auto text-center">
+          <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">Testimonials</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
             What our clients say
           </h2>
+          <p className="mt-4 text-muted-foreground">Trusted by hundreds of homeowners and businesses across the region.</p>
         </Reveal>
 
         <div className="mt-14 grid md:grid-cols-3 gap-6">
           {testimonials.map((t, i) => (
             <Reveal key={t.name} delay={i * 100}>
-              <figure className="h-full rounded-2xl bg-card border border-border p-7 shadow-sm flex flex-col">
+              <figure className="relative h-full rounded-2xl bg-card border border-border p-7 shadow-sm flex flex-col overflow-hidden hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
+                <div className="pointer-events-none absolute -right-2 -top-4 font-display text-[110px] font-black leading-none select-none text-primary/[0.04]">"</div>
                 <div className="flex gap-0.5 text-accent" aria-label="5 star rating">
                   {Array.from({ length: 5 }).map((_, idx) => (
                     <Star key={idx} className="h-4 w-4 fill-current" />
@@ -458,9 +490,14 @@ function Testimonials() {
                 <blockquote className="mt-4 text-foreground/90 leading-relaxed flex-1">
                   "{t.quote}"
                 </blockquote>
-                <figcaption className="mt-5 text-sm">
-                  <div className="font-semibold text-primary">{t.name}</div>
-                  <div className="text-muted-foreground text-xs">{t.role}</div>
+                <figcaption className="mt-5 flex items-center gap-3">
+                  <div className="h-9 w-9 rounded-full bg-primary/10 text-primary flex items-center justify-center font-display text-sm font-bold shrink-0">
+                    {t.name.charAt(0)}
+                  </div>
+                  <div className="text-sm">
+                    <div className="font-semibold text-primary">{t.name}</div>
+                    <div className="text-muted-foreground text-xs">{t.role}</div>
+                  </div>
                 </figcaption>
               </figure>
             </Reveal>
@@ -484,7 +521,7 @@ const faqs = [
   },
   {
     q: "Are you licensed and insured?",
-    a: "Yes — we are fully licensed, bonded, and insured. All technicians are certified, and every job is permitted and inspected to local code.",
+    a: "Yes   we are fully licensed, bonded, and insured. All technicians are certified, and every job is permitted and inspected to local code.",
   },
   {
     q: "What warranty do you offer?",
@@ -498,10 +535,11 @@ const faqs = [
 
 function Faq() {
   return (
-    <section className="py-20 md:py-28">
+    <section className="relative py-20 md:py-28 overflow-hidden" style={{ background: "linear-gradient(to bottom, var(--color-background) 0%, oklch(0.97 0.01 250) 100%)" }}>
+      <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 h-64 w-[600px] rounded-full bg-primary/[0.05] blur-3xl" />
       <div className="mx-auto max-w-4xl px-4 sm:px-6">
         <Reveal className="text-center max-w-2xl mx-auto">
-          <p className="text-sm font-semibold uppercase tracking-wider text-accent">FAQ</p>
+          <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">FAQ</p>
           <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold text-primary">
             Frequently asked questions
           </h2>
@@ -510,7 +548,7 @@ function Faq() {
           </p>
         </Reveal>
 
-        <div className="mt-12 divide-y divide-border rounded-2xl border border-border bg-card">
+        <div className="mt-12 divide-y divide-border rounded-2xl border border-border bg-card shadow-md">
           {faqs.map((f, i) => (
             <Reveal key={f.q} delay={i * 50}>
               <details className="group p-6 open:bg-secondary/40 transition">
@@ -518,11 +556,12 @@ function Faq() {
                   <span className="font-display text-base sm:text-lg font-bold text-primary">
                     {f.q}
                   </span>
-                  <span className="grid h-8 w-8 place-items-center rounded-full bg-secondary text-primary group-open:bg-accent group-open:text-accent-foreground transition">
-                    <ArrowRight className="h-4 w-4 group-open:rotate-90 transition-transform" />
+                  <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-secondary text-primary group-open:bg-accent group-open:text-accent-foreground transition-colors">
+                    <Plus className="h-4 w-4 group-open:hidden" />
+                    <Minus className="h-4 w-4 hidden group-open:block" />
                   </span>
                 </summary>
-                <p className="mt-3 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
+                <p className="faq-body mt-3 text-sm text-muted-foreground leading-relaxed">{f.a}</p>
               </details>
             </Reveal>
           ))}
@@ -538,11 +577,17 @@ function Contact() {
   const [submitted, setSubmitted] = useState(false);
 
   return (
-    <section id="contact" className="py-20 md:py-28 bg-primary text-white">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-5 gap-10">
+    <section
+      id="contact"
+      className="relative py-20 md:py-28 overflow-hidden text-white"
+      style={{ background: "linear-gradient(135deg, oklch(0.20 0.06 258) 0%, oklch(0.28 0.07 260) 100%)" }}
+    >
+      <div className="pointer-events-none absolute right-0 top-0 h-96 w-96 rounded-full bg-accent/[0.08] blur-3xl" />
+      <div className="pointer-events-none absolute left-0 bottom-0 h-64 w-64 rounded-full bg-white/[0.03] blur-2xl" />
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 grid lg:grid-cols-5 gap-10">
         <div className="lg:col-span-2">
           <Reveal>
-            <p className="text-sm font-semibold uppercase tracking-wider text-accent">Contact</p>
+            <p className="inline-flex items-center rounded-full bg-accent/10 border border-accent/20 px-3 py-1 text-xs font-bold uppercase tracking-widest text-accent">Contact</p>
             <h2 className="mt-2 text-3xl sm:text-4xl lg:text-5xl font-bold">
               Get your free quote today
             </h2>
@@ -553,7 +598,7 @@ function Contact() {
 
             <ul className="mt-8 space-y-4 text-sm">
               <li className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/10 text-accent">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-white/20 to-white/5 border border-white/10 text-accent shrink-0">
                   <Phone className="h-4 w-4" />
                 </span>
                 <a href="tel:+15551234567" className="hover:text-accent transition">
@@ -561,7 +606,7 @@ function Contact() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/10 text-accent">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-white/20 to-white/5 border border-white/10 text-accent shrink-0">
                   <Mail className="h-4 w-4" />
                 </span>
                 <a href="mailto:hello@solarcareelectric.com" className="hover:text-accent transition">
@@ -569,13 +614,13 @@ function Contact() {
                 </a>
               </li>
               <li className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/10 text-accent">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-white/20 to-white/5 border border-white/10 text-accent shrink-0">
                   <MapPin className="h-4 w-4" />
                 </span>
                 Serving your city & surrounding areas
               </li>
               <li className="flex items-center gap-3">
-                <span className="grid h-10 w-10 place-items-center rounded-lg bg-white/10 text-accent">
+                <span className="grid h-10 w-10 place-items-center rounded-lg bg-gradient-to-br from-white/20 to-white/5 border border-white/10 text-accent shrink-0">
                   <Clock className="h-4 w-4" />
                 </span>
                 Mon–Sat · 8:00 AM – 6:00 PM
@@ -621,9 +666,9 @@ function Contact() {
 
             <button
               type="submit"
-              className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground hover:brightness-95 transition"
+              className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3.5 text-sm font-semibold text-accent-foreground shadow-md shadow-accent/25 hover:shadow-lg hover:shadow-accent/40 hover:brightness-95 transition-all"
             >
-              {submitted ? "Thanks — we'll be in touch!" : "Submit Request"}
+              {submitted ? "Thanks   we'll be in touch!" : "Submit Request"}
               {!submitted && <ArrowRight className="h-4 w-4" />}
             </button>
             <p className="mt-3 text-xs text-muted-foreground text-center">
@@ -660,7 +705,7 @@ function Field({
 
 function Footer() {
   return (
-    <footer className="bg-primary text-white/80 border-t border-white/10">
+    <footer className="text-white/80 border-t border-white/10" style={{ background: "linear-gradient(to bottom, oklch(0.22 0.06 258) 0%, oklch(0.17 0.05 258) 100%)" }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 py-14 grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <a href="#home" className="flex items-center gap-2">
@@ -672,7 +717,7 @@ function Footer() {
             </span>
           </a>
           <p className="mt-4 text-sm max-w-md leading-relaxed">
-            Clean energy, electrical repair, and EV charging — done by licensed local pros you can
+            Clean energy, electrical repair, and EV charging   done by licensed local pros you can
             trust. Powering homes and businesses with care since 2014.
           </p>
         </div>
